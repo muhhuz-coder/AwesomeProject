@@ -8,10 +8,8 @@ import  {Counter}  from './android/app/src/redux/features/counter/Counter';
 import { useSelector } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
-
 function RootStack() {
-  // const userData = false;
-  const {userData} = useSelector(state => state.auth);  // Adjust this according to your state structure
+  const {userData} = useSelector(state => state.auth);  
   console.log('~ file: Login.js:15 ~ Login ~ userData:', userData);
 
   return (
@@ -24,7 +22,6 @@ function RootStack() {
       ) : (
       <Stack.Group>
        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-       <Stack.Screen name="Counter" component={Counter} />
        <Stack.Screen  name="Signup" component={SignUpScreen} options={{ headerShown: false }} />
 
       </Stack.Group>

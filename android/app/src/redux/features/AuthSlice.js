@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { API } from "../../api"
+import { ToastAndroid } from "react-native";
 
 const InitialState = {
     userData : null,
     isLoading: false ,
     isSuccess: false, 
     isError: false, 
-
 } 
 
 // login 
@@ -52,18 +52,18 @@ const AuthSlice = createSlice({
         builder.addCase(login.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            const errorMessage = action.payload?.response?.data?.message || 'Login failed';
+            const errorMessage =  'Invalid Credentials';
             state.userData = null;
             state.errorMessage = errorMessage; 
+            ToastAndroid.showWithGravity(errorMessage,ToastAndroid.SHORT, ToastAndroid.CENTER);
         });
 
          // Handle logout
          builder.addCase(logout.fulfilled, (state) => {
-            // Reset state upon logout
             state.userData = null;
             state.isSuccess = false;
             state.isError = false;
-            state.errorMessage = null; // Clear any previous error messages
+            state.errorMessage = null;
         });
         
         

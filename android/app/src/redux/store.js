@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const reducers = combineReducers({
   counter: counterSlice,
-    auth: AuthSlice,
+  auth: AuthSlice,
 })
 
 const persistConfig = {

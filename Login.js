@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, KeyboardAvoidingView, Platform, ToastAndroid } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from './android/app/src/redux/features/AuthSlice';
 
@@ -13,22 +13,14 @@ export default function LoginScreen() {
 
   //hooks
   const dispatch = useDispatch();
-  const {userData, isLoading} = useSelector(state => state.auth); 
-
+  const {userData,isError} = useSelector(state => state.auth); 
 
   const pressHandler = () => {
-    // if (password === 'emilys' && username === 'emilyspass') {
-    //   navigation.popTo('Home');
-    //   setUsername('');
-    //   setPassword('');
-    // } else {
-    //   alert("Invalid credentials");
-    // }
-    trimmeduser = username.trim();
-    trimmedpass = password.trim();
+    let trimmeduser = username.trim();
+    let trimmedpass = password.trim();
     const params = {
-      username: username,
-      password : password,
+      username: trimmeduser,
+      password : trimmedpass,
     };
     dispatch(login(params));
   };
@@ -72,11 +64,11 @@ export default function LoginScreen() {
           <Text style={styles.signupLink}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.signupContainer}>
+      {/* <View style={styles.signupContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('Counter')}>
           <Text style={styles.signupLink}>Counter</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </KeyboardAvoidingView>
   );
 }
@@ -96,7 +88,7 @@ const styles = StyleSheet.create({
     marginTop: '20%',
   },
   welcomeText: {
-    fontSize: 41,
+    fontSize: 35,
     fontWeight: 'bold',
   },
   subText: {

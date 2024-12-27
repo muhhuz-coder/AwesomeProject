@@ -3,8 +3,10 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { logout } from './android/app/src/redux/features/AuthSlice';
 import { useDispatch } from 'react-redux';
+import { useSignup } from './SignupContext';
 
 export default function Home() {
+  const { signupData } = useSignup(); // Access the signup data from context
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -25,6 +27,9 @@ export default function Home() {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Home</Text>
       <Text style={styles.subtitle}>This is your home screen.</Text>
+
+      <Text>Welcome, {signupData.username}</Text>
+      <Text>Email: {signupData.email}</Text>
 
       <TouchableOpacity onPress={handleNavigateCounter} style={styles.button}>
         <Text style={styles.buttonText}>Go to Counter Screen</Text>
@@ -68,3 +73,4 @@ const styles = {
     fontSize: 16,
   },
 };
+

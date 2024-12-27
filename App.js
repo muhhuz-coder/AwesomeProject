@@ -13,16 +13,18 @@ function RootStack() {
   console.log('~ file: Login.js:15 ~ Login ~ userData:', userData);
 
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator >
       {userData ? (
       <Stack.Group>
        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
        <Stack.Screen name="Counter" component={Counter} />
+
       </Stack.Group>
       ) : (
       <Stack.Group>
        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
        <Stack.Screen  name="Signup" component={SignUpScreen} options={{ headerShown: false }} />
+
 
       </Stack.Group>
       )}
